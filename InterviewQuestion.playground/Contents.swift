@@ -12,8 +12,8 @@ import UIKit
 // return true or false
 
 
-//Brute for approach O(n^2)
-func containsCommonItems(array1: [String], array2: [String]) -> Bool {
+//Brute force approach O(n * m) as there are two arrays which can be of difference sizes
+func containsCommonItem(array1: [String], array2: [String]) -> Bool {
     for string1 in array1 {
         for string2 in array2 {
             if string1 == string2 {
@@ -24,6 +24,6 @@ func containsCommonItems(array1: [String], array2: [String]) -> Bool {
     return false
 }
 
-containsCommonItems(array1: ["a", "b", "c", "x"], array2: ["z", "y", "x"])
+containsCommonItem(array1: ["a", "b", "c", "x"], array2: ["z", "y", "x"])
 
 
