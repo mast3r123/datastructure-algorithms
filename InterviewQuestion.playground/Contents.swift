@@ -13,6 +13,7 @@ import UIKit
 
 
 //Brute force approach O(n * m) as there are two arrays which can be of difference sizes
+//O(1) space complexity, becuase no new variable is created
 func containsCommonItem(array1: [String], array2: [String]) -> Bool {
     for string1 in array1 {
         for string2 in array2 {
@@ -27,6 +28,7 @@ func containsCommonItem(array1: [String], array2: [String]) -> Bool {
 containsCommonItem(array1: ["a", "b", "c", "x"], array2: ["z", "y", "x"])
 
 //More efficient approach O(a + b) time complexity as it loops over two different arrays
+//O(a) space complexity
 func containsCommonItm(array1: [String], array2: [String]) -> Bool {
     
     var map = [String: Bool]()
@@ -49,7 +51,7 @@ func containsCommonItm(array1: [String], array2: [String]) -> Bool {
 
 containsCommonItm(array1: ["a", "b", "c", "x"], array2: ["z", "y", "x"])
 
-//Inbuilt array function approach
+//Inbuilt array function approach more readable
 func containsCommonElements(array1: [String], array2: [String]) -> Bool {
     return array1.contains { elem in
         array2.contains(elem)
