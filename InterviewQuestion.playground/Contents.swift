@@ -26,4 +26,34 @@ func containsCommonItem(array1: [String], array2: [String]) -> Bool {
 
 containsCommonItem(array1: ["a", "b", "c", "x"], array2: ["z", "y", "x"])
 
+//More efficient approach O(a + b) time complexity as it loops over two different arrays
+func containsCommonItm(array1: [String], array2: [String]) -> Bool {
+    
+    var map = [String: Bool]()
+    //loop through first array and create object where properties === items in the array
+    for i in 0..<array1.count {
+        if(map[array1[i]] == nil) {
+            map[array1[i]] = true
+        }
+    }
+    
+    // loop through second array and check if item in second array exists on created object.
+    for j in 0..<array2.count {
+        if(map[array2[j]] != nil) {
+            return true
+        }
+    }
+    
+    return false
+}
 
+containsCommonItm(array1: ["a", "b", "c", "x"], array2: ["z", "y", "x"])
+
+//Inbuilt array function approach
+func containsCommonElements(array1: [String], array2: [String]) -> Bool {
+    return array1.contains { elem in
+        array2.contains(elem)
+    }
+}
+
+containsCommonElements(array1: ["a", "b", "c", "r"], array2: ["z", "y", "x"])
