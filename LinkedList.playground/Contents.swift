@@ -14,9 +14,9 @@ class Node<Value> {
 extension Node: CustomStringConvertible {
     var description: String {
         if let next = next {
-            return ("\(value) -> \(next)")
+            return ("\(value) -> next: \(next)")
         } else {
-            return ("\(value)")
+            return ("\(value) -> next: null")
         }
     }
 }
@@ -35,8 +35,20 @@ struct LinkedList<Value> {
             tail = Node.init(value: value)
         }
     }
+    
+    mutating func prepend(value: Value) {
+        
+        if head == nil {
+            head = Node.init(value: value)
+            tail = head
+        } else {
+            head = Node.init(value: value, next: head)
+        }
+    }
 }
 
 var ll = LinkedList<Int>()
 ll.append(value: 9)
+ll.append(value: 11)
+ll.prepend(value: 5)
 print(ll)
