@@ -47,7 +47,8 @@ struct LinkedList<Value> {
         }
     }
     
-    mutating func insert(index: Int, value: Value) {
+    //O(n)
+    mutating func insert(at index: Int, value: Value) {
         if index < 0 {
             print("Invalid index")
         }
@@ -61,6 +62,26 @@ struct LinkedList<Value> {
             let holdingPointer = leader?.next
             leader?.next = newNode
             newNode.next = holdingPointer
+        }
+    }
+    
+    //O(n)
+    mutating func remove(at index: Int) {
+        if index < 0 {
+            print("Invalid Index")
+        }
+        
+        if index == 0 {
+            if head?.next == nil {
+                head = nil
+                tail = nil
+            } else {
+                head = head?.next
+            }
+        } else {
+            let leader = traverseToIndex(index: index - 1)
+            let next = leader?.next
+            leader?.next = next?.next
         }
     }
     
@@ -81,6 +102,7 @@ var ll = LinkedList<Int>()
 ll.append(value: 9)
 ll.append(value: 11)
 ll.prepend(value: 5)
-print(ll)
-ll.insert(index: 1, value: 10)
+//print(ll)
+//ll.insert(at: 10, value: 10)
+ll.remove(at: 1)
 print(ll)
