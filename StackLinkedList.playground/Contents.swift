@@ -56,12 +56,14 @@ struct Stack<Value> {
         if length == 1 {
             top = nil
             bottom = nil
+            length -= 1
+            return top
         } else {
             let next = top?.next
             top = top?.next
+            length -= 1
             return next
         }
-        length -= 1
     }
     
     //O(1)
