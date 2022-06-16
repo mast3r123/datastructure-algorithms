@@ -59,7 +59,7 @@ struct Stack<Value> {
             length -= 1
             return top
         } else {
-            let next = top?.next
+            let next = top?
             top = top?.next
             length -= 1
             return next
@@ -87,7 +87,6 @@ var myStack = Stack<Int>()
 myStack.push(value: 3)
 myStack.push(value: 4)
 myStack.push(value: 5)
-myStack.pop()
 myStack.pop()
 myStack.pop()
 print(myStack)
