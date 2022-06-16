@@ -54,10 +54,11 @@ struct Stack<Value> {
         }
         
         if length == 1 {
+            let temp = top
             top = nil
             bottom = nil
             length -= 1
-            return top
+            return temp
         } else {
             let temp = top
             top = top?.next
@@ -88,6 +89,5 @@ myStack.push(value: 3)
 myStack.push(value: 4)
 myStack.push(value: 5)
 myStack.pop()
-myStack.pop()
-myStack.pop()
-print(myStack)
+print(myStack.pop())
+print(myStack.pop())
