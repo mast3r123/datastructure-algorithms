@@ -59,10 +59,10 @@ struct Stack<Value> {
             length -= 1
             return top
         } else {
-            let next = top?.next
+            let temp = top
             top = top?.next
             length -= 1
-            return next
+            return temp
         }
     }
     
