@@ -86,6 +86,70 @@ struct BinaryTree<T: Comparable> {
         }
         return nil
     }
+    
+    mutating func remove(value: T) {
+        if (root == nil) {
+            return
+        }
+        
+        var currentNode = root
+        var parentNode: Node<T>?
+        
+        while(currentNode != nil) {
+            if (value < currentNode!.element) {
+                parentNode = currentNode
+                currentNode = currentNode?.left
+            } else if (value > currentNode!.element) {
+                parentNode = currentNode
+                currentNode = currentNode?.right
+            } else if (value == currentNode!.element) {
+                if currentNode?.right == nil {
+                    if parentNode == nil {
+                        root = currentNode?.left
+                    } else {
+                        if currentNode!.element < parentNode!.element {
+                            parentNode?.left = currentNode?.left
+                        } else if (currentNode!.element > parentNode!.element) {
+                            parentNode?.right = currentNode?.left
+                        }
+                    }
+                } else if currentNode?.right?.left == nil {
+                    currentNode?.right?.left = currentNode?.left
+                    if parentNode == nil {
+                        root = currentNode?.right
+                    } else {
+                        if currentNode!.element < parentNode!.element {
+                            parentNode?.left = currentNode?.right
+                        } else if (currentNode!.element > parentNode!.element) {
+                            parentNode?.right = currentNode?.right
+                        }
+                    }
+                } else {
+                    var leftmost = currentNode?.right?.left;
+                    var leftmostParent = currentNode?.right;
+                    while(leftmost?.left != nil) {
+                        leftmostParent = leftmost;
+                        leftmost = leftmost?.left;
+                    }
+                    
+                    //Parent's left subtree is now leftmost's right subtree
+                    leftmostParent?.left = leftmost?.right;
+                    leftmost?.left = currentNode?.left;
+                    leftmost?.right = currentNode?.right;
+                    
+                    if(parentNode == nil) {
+                        root = leftmost;
+                    } else {
+                        if(currentNode!.element < parentNode!.element) {
+                            parentNode?.left = leftmost;
+                        } else if(currentNode!.element > parentNode!.element) {
+                            parentNode?.right = leftmost;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 var tree = BinaryTree<Int>()
@@ -97,6 +161,5 @@ tree.insert(value: 20)
 tree.insert(value: 170)
 tree.insert(value: 15)
 tree.insert(value: 1)
-
-print(tree.lookup(value: 4))
+tree.remove(value: 9)
 print(tree)
