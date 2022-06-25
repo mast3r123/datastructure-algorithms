@@ -69,12 +69,27 @@ struct BinaryTree<T: Comparable> {
         }
     }
     
-    mutating func lookup() {
-        
+    mutating func lookup(value: T) -> Node<T>? {
+        if(root == nil) {
+            return nil
+        } else {
+            var currentNode = root
+            while(currentNode != nil) {
+                if value < currentNode!.element {
+                    currentNode = currentNode?.left
+                } else if(value > currentNode!.element) {
+                    currentNode = currentNode?.right
+                } else if(value == currentNode?.element) {
+                    return currentNode
+                }
+            }
+        }
+        return nil
     }
 }
 
 var tree = BinaryTree<Int>()
+
 tree.insert(value: 9)
 tree.insert(value: 4)
 tree.insert(value: 6)
@@ -82,4 +97,6 @@ tree.insert(value: 20)
 tree.insert(value: 170)
 tree.insert(value: 15)
 tree.insert(value: 1)
+
+print(tree.lookup(value: 4))
 print(tree)
